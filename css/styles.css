@@ -1,0 +1,63 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Times New Roman", Times, serif;
+  background-color: rgb(246, 246, 246);
+}
+
+textarea {
+  padding: 4px;
+  margin-top: 4px;
+  border-radius: 8px;
+  background-color: rgb(255, 255, 255);
+}
+
+span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.container {
+  margin: auto;
+  display: flex;
+  max-width: 50%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header {
+  margin: 32px;
+  font-size: 48px;
+  text-align: center;
+}
+
+.button {
+  padding: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: rgb(225, 225, 225);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button:hover,
+.button:active {
+  background-color: rgb(236, 236, 236);
+}
+
+.action_buttons {
+  display: flex;
+  margin-bottom: 32px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.action_buttons .button {
+  width: 48%;
+}

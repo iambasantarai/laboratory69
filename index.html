@@ -5,15 +5,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script defer src="./scripts/index.js"></script>
+    <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <h1>base<sub>64</sub>ed</h1>
-    <div>
-      <textarea rows="5" cols="" id="inputString"></textarea>
-      <input id="encodeButton" type="button" value="Encode" />
-      <input id="decodeButton" type="button" value="Decode" />
+    <div class="container">
+      <h1 class="header">base<sub>64</sub>ed</h1>
+      <span>Input</span>
+      <textarea
+        rows="5"
+        cols=""
+        id="inputString"
+        placeholder="Enter your text to encode or decode..."
+      ></textarea>
+      <div class="action_buttons">
+        <input id="encodeButton" class="button" type="button" value="Encode" />
+        <input id="decodeButton" class="button" type="button" value="Decode" />
+      </div>
+      <span>Output</span>
+      <textarea
+        rows="5"
+        cols=""
+        id="outputString"
+        placeholder="Result will appear here..."
+      ></textarea>
+      <input
+        id="copyButton"
+        class="button"
+        type="button"
+        value="Copy to clipboard"
+      />
     </div>
-    <textarea rows="5" cols="" id="outputString"></textarea>
-    <input id="copyButton" type="button" value="Copy" />
   </body>
 </html>
