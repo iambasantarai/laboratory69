@@ -8,5 +8,8 @@
       "name": "iambasantarai",
       "email": "iambasantarai@gmail.com"
     }
-  ]
+  ],
+  "require": {
+    "laravel/prompts": "^0.1.15"
+  }
 }
