@@ -28,6 +28,9 @@
     function loop($string, $notes) {
         while(true) {
             $index = generateRandomIndex($notes);
+
+            $startTime = microtime(true);
+
             $guess = text(
                 label: $index + 1 . " th fret of " . $string . " string is?",
                 validate: fn ($value) => match(true) {
@@ -38,9 +41,18 @@
             );
 
             if (!($guess === $notes[$index])) {
-                echo "[INFO]: incorrect\n\n";
+                echo "\x20[INFO]: incorrect\n";
+                echo "\x20Try another one in 3 seconds...\n";
+
+                sleep(3);
             } else {
-                echo "[INFO]: correct\n\n";
+                $endTime = microtime(true);
+                $elapsedTime = $endTime - $startTime;
+
+                echo "\x20[INFO]: correct\n";
+                echo "\x20[TIME]: " . $elapsedTime . "s\n";
+                echo "\x20Try another one in 3 seconds...\n";
+                sleep(3);
             }
         }
     }
