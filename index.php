@@ -28,9 +28,14 @@
     function loop($string, $notes) {
         while(true) {
             $index = generateRandomIndex($notes);
-            $guess = text($index + 1 . " th fret of " . $string . " string is?");
-
-            if ($guess === 'quit') break;
+            $guess = text(
+                label: $index + 1 . " th fret of " . $string . " string is?",
+                validate: fn ($value) => match(true) {
+                    $value === 'quit' => exit(),
+                    !in_array($value, $notes) => 'Please enter a valid musical note.',
+                    default => null
+                }
+            );
 
             if (!($guess === $notes[$index])) {
                 echo "INCORRECT\n\n";
