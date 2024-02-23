@@ -7,6 +7,13 @@
 
     $strings = ['e', 'B', 'G', 'D', 'A', 'E'];
 
+    $eStringNotes = ['F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E'];
+    $BStringNotes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    $GStringNotes = ['G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G'];
+    $DStringNotes = ['D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D'];
+    $AStringNotes = ['A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A'];
+    $EStringNotes = ['F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E'];
+
     $string = select(
         "Select a string",
         $strings,
@@ -14,30 +21,49 @@
         scroll: 6
     );
 
+    function generateRandomIndex($values) {
+        return rand(0, count($values) - 1);
+    }
+
+    function loop($string, $notes) {
+        while(true) {
+            $index = generateRandomIndex($notes);
+            $guess = text($index + 1 . " th fret of " . $string . " string is?");
+
+            if ($guess === 'quit') break;
+
+            if (!($guess === $notes[$index])) {
+                echo "INCORRECT\n\n";
+            } else {
+                echo "CORRECT\n\n";
+            }
+        }
+    }
+
     if (in_array($string, $strings)) {
         switch ($string) {
             case 'e':
-                echo $string . " string is selected. \n";
+                loop("e", $eStringNotes);
                 break;
 
             case 'B':
-                echo $string . " string is selected. \n";
+                loop("B", $BStringNotes);
                 break;
 
             case 'G':
-                echo $string . " string is selected. \n";
+                loop("G", $GStringNotes);
                 break;
 
             case 'D':
-                echo $string . " string is selected. \n";
+                loop("D", $DStringNotes);
                 break;
 
             case 'A':
-                echo $string . " string is selected. \n";
+                loop("A", $AStringNotes);
                 break;
 
             case 'E':
-                echo $string . " string is selected. \n";
+                loop("E", $EStringNotes);
                 break;
             
             default:
