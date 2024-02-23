@@ -38,9 +38,9 @@
             );
 
             if (!($guess === $notes[$index])) {
-                echo "INCORRECT\n\n";
+                echo "[INFO]: incorrect\n\n";
             } else {
-                echo "CORRECT\n\n";
+                echo "[INFO]: correct\n\n";
             }
         }
     }
