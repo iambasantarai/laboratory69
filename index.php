@@ -25,6 +25,14 @@
         return rand(0, count($values) - 1);
     }
 
+    function countdown() {
+        for ($i = 3; $i > 0; $i--) { 
+            echo "\x20Try another one in ". $i ." seconds...\r";
+            sleep(1);
+        }
+        echo "\033[2K\r";
+    }
+
     function loop($string, $notes) {
         while(true) {
             $index = generateRandomIndex($notes);
@@ -41,18 +49,15 @@
             );
 
             if (!($guess === $notes[$index])) {
-                echo "\x20[INFO]: incorrect\n";
-                echo "\x20Try another one in 3 seconds...\n";
-
-                sleep(3);
+                echo "\x20[INFO]: incorrect\n\n";
+                countdown();
             } else {
                 $endTime = microtime(true);
                 $elapsedTime = $endTime - $startTime;
 
                 echo "\x20[INFO]: correct\n";
-                echo "\x20[TIME]: " . $elapsedTime . "s\n";
-                echo "\x20Try another one in 3 seconds...\n";
-                sleep(3);
+                echo "\x20[TIME]: " . $elapsedTime . "s\n\n";
+                countdown();
             }
         }
     }
