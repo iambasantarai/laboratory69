@@ -55,7 +55,7 @@
 
             if (!($guess === $notes[$index])) {
                 echo "\x20[INFO]: incorrect\n\n";
-                countdown();
+                if ($attempt < 11)  countdown();
             } else {
                 $endTime = microtime(true);
                 $elapsedTime = $endTime - $startTime;
@@ -64,7 +64,7 @@
 
                 echo "\x20[INFO]: correct\n";
                 echo "\x20[TIME]: " . $elapsedTime . "s\n\n";
-                countdown();
+                if ($attempt < 11)  countdown();
             }
 
             $attempt++;
