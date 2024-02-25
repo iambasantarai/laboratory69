@@ -10,6 +10,7 @@
     }
   ],
   "require": {
-    "laravel/prompts": "^0.1.15"
+    "laravel/prompts": "^0.1.15",
+    "kevinlebrun/colors.php": "^1.0"
   }
 }

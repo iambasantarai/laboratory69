@@ -1,9 +1,11 @@
 <?php
 
+    require __DIR__ . "/vendor/autoload.php";
+
     use function Laravel\Prompts\text;
     use function Laravel\Prompts\select;
 
-    require __DIR__ . "/vendor/autoload.php";
+    use Colors\Color;
 
     $strings = ['e', 'B', 'G', 'D', 'A', 'E'];
 
@@ -33,6 +35,11 @@
         echo "\033[2K\r";
     }
 
+    function infoLogger($message) {
+        $color = new Color();
+        echo "\x20" . $color("[INFO]:")->black()->bold()->bg("light_green"). " " . $message ."\n";
+    }
+
     function loop($string, $notes) {
 
         $score = 0;
@@ -55,7 +62,8 @@
             );
 
             if (!($guess === $notes[$index])) {
-                echo "\x20[INFO]: incorrect\n\n";
+                infoLogger("incorrect\n");
+
                 if ($attempt < 11)  countdown();
             } else {
                 $endTime = microtime(true);
@@ -64,20 +72,21 @@
 
                 $score++;
 
-                echo "\x20[INFO]: correct\n";
-                echo "\x20[TIME]: " . $elapsedTime . "s\n\n";
+                infoLogger("incorrect");
+                infoLogger($elapsedTime . "s\n");
+
                 if ($attempt < 11)  countdown();
             }
 
             $attempt++;
         }
 
-        echo "\x20[INFO]: You socred " . $score . "/" . $attempt . "\n";
+        infoLogger("You scored " . $score . "/" . $attempt);
 
         if ($score > 0) {
             $averageTime = $totalTime / $attempt;
 
-            echo "\x20[INFO]: Average time per correct guess: " . $averageTime . "s\n";
+            infoLogger("Average time per correct guess: " . $averageTime . "s");
         }
     }
 
