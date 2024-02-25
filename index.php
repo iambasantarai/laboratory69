@@ -34,7 +34,12 @@
     }
 
     function loop($string, $notes) {
-        while(true) {
+
+        $score = 0;
+        $attempt = 0;
+
+        while($attempt < 12) {
+
             $index = generateRandomIndex($notes);
 
             $startTime = microtime(true);
@@ -55,11 +60,16 @@
                 $endTime = microtime(true);
                 $elapsedTime = $endTime - $startTime;
 
+                $score++;
+
                 echo "\x20[INFO]: correct\n";
                 echo "\x20[TIME]: " . $elapsedTime . "s\n\n";
                 countdown();
             }
+
+            $attempt++;
         }
+        echo "\x20[INFO]: You socred " . $score . "/" . $attempt . "\n";
     }
 
     if (in_array($string, $strings)) {
