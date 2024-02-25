@@ -37,6 +37,7 @@
 
         $score = 0;
         $attempt = 0;
+        $totalTime = 0;
 
         while($attempt < 12) {
 
@@ -59,6 +60,7 @@
             } else {
                 $endTime = microtime(true);
                 $elapsedTime = $endTime - $startTime;
+                $totalTime += $elapsedTime;
 
                 $score++;
 
@@ -69,7 +71,14 @@
 
             $attempt++;
         }
+
         echo "\x20[INFO]: You socred " . $score . "/" . $attempt . "\n";
+
+        if ($score > 0) {
+            $averageTime = $totalTime / $attempt;
+
+            echo "\x20[INFO]: Average time per correct guess: " . $averageTime . "s\n";
+        }
     }
 
     if (in_array($string, $strings)) {
