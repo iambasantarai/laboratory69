@@ -72,7 +72,7 @@
 
                 $score++;
 
-                infoLogger("incorrect");
+                infoLogger("correct");
                 infoLogger($elapsedTime . "s\n");
 
                 if ($attempt < 11)  countdown();
