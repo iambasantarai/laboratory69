@@ -11,16 +11,30 @@ body {
   background-color: rgb(246, 246, 246);
 }
 
-textarea {
-  padding: 4px;
-  margin-top: 4px;
-  border-radius: 8px;
-  background-color: rgb(255, 255, 255);
+body::before {
+  --line: hsl(0 0% 15% / 0.25);
+  --size: 60px;
+  content: "";
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  background:
+    linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 50% 50% /
+      var(--size) var(--size),
+    linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% /
+      var(--size) var(--size);
+  mask: linear-gradient(0deg, transparent 8%, white);
+  top: 0;
+  z-index: -1;
+  transform: translate3d(0, 0, -100vmin);
 }
 
-span {
-  font-size: 16px;
-  font-weight: 500;
+textarea {
+  padding: 4px;
+  margin-top: 8px;
+  height: 12rem;
+  border-radius: 8px;
+  background-color: rgb(255, 255, 255);
 }
 
 .container {
@@ -37,9 +51,15 @@ span {
   text-align: center;
 }
 
+.input-header,
+.output-header {
+  font-size: 24px;
+  font-weight: 500;
+}
+
 .button {
-  padding: 8px;
-  margin-top: 8px;
+  padding: 12px;
+  margin-top: 12px;
   cursor: pointer;
   border-radius: 8px;
   background-color: rgb(225, 225, 225);

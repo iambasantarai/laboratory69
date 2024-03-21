@@ -7,27 +7,34 @@
     <script defer src="./scripts/index.js"></script>
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
+
   <body>
     <div class="container">
       <h1 class="header">base<sub>64</sub>ed</h1>
-      <span>Input</span>
+
+      <span class="input-header">Input</span>
+
       <textarea
         rows="5"
         cols=""
         id="inputString"
         placeholder="Enter your text to encode or decode..."
       ></textarea>
+
       <div class="action_buttons">
         <input id="encodeButton" class="button" type="button" value="Encode" />
         <input id="decodeButton" class="button" type="button" value="Decode" />
       </div>
-      <span>Output</span>
+
+      <span class="output-header">Output</span>
+
       <textarea
         rows="5"
         cols=""
         id="outputString"
         placeholder="Result will appear here..."
       ></textarea>
+
       <input
         id="copyButton"
         class="button"
@@ -35,11 +42,13 @@
         value="Copy to clipboard"
       />
     </div>
+
     <a
       href="https://github.com/iamsampang/base64ed"
       class="github-corner"
       aria-label="View source on Github"
-      ><svg
+    >
+      <svg
         width="80"
         height="80"
         viewBox="0 0 250 250"
