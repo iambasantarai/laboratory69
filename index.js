@@ -19,8 +19,12 @@ client.on("messageCreate", (message) => {
   if (message.author.bot) return;
 
   message.reply({
-    content: "Hey, I'm bhunte. BHAW BHAW!",
+    content: "Hey, how can i help you?",
   });
+});
+
+client.on("interactionCreate", (interaction) => {
+  interaction.reply("BHAW BHAW!");
 });
 
 client.login(process.env.TOKEN);
