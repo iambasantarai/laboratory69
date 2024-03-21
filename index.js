@@ -1,14 +1,10 @@
 import dotenv from "dotenv";
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client } from "discord.js";
 
 dotenv.config();
 
 const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-  ],
+  intents: ["Guilds", "GuildMessages", "MessageContent"],
 });
 
 client.on("ready", () => {
@@ -17,6 +13,8 @@ client.on("ready", () => {
 
 client.on("messageCreate", (message) => {
   if (message.author.bot) return;
+
+  if (!message.mentions.users.has(client.user.id)) return;
 
   message.reply({
     content: "Hey, how can i help you?",
