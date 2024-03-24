@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { REST, Routes } from "discord.js";
+import { ApplicationCommandOptionType, REST, Routes } from "discord.js";
 
 dotenv.config();
 
@@ -7,6 +7,18 @@ const commands = [
   {
     name: "bhunte",
     description: "Call bhunte.",
+  },
+  {
+    name: "search",
+    description: "Performs web search.",
+    options: [
+      {
+        name: "query",
+        description: "Your query to search on the web.",
+        type: ApplicationCommandOptionType.String,
+        required: true,
+      },
+    ],
   },
 ];
 

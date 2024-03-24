@@ -22,7 +22,13 @@ client.on("messageCreate", (message) => {
 });
 
 client.on("interactionCreate", (interaction) => {
-  interaction.reply("BHAW BHAW!");
+  if (!interaction.isChatInputCommand()) return;
+
+  if (interaction.commandName === "search") {
+    const query = interaction.options.get("query").value;
+
+    interaction.reply("Will search for " + query);
+  }
 });
 
 client.login(process.env.TOKEN);
