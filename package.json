@@ -5,7 +5,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/index.js",
+    "sync-commands": "node src/command.js"
   },
   "dependencies": {
     "discord.js": "^14.14.1",
