@@ -9,8 +9,11 @@
     "sync-commands": "node src/command.js"
   },
   "dependencies": {
+    "@langchain/core": "^0.1.49",
+    "@langchain/openai": "^0.0.23",
     "discord.js": "^14.14.1",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "langchain": "^0.1.28"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
