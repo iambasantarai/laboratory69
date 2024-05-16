@@ -18,18 +18,17 @@ func main() {
 func noteWriter(title string, url string) {
     filename := "/home/basanta/Code/termnote/termnote.md"
     file, err := os.OpenFile(filename, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666) 
-
-    if err != nil {
-        fmt.Println("Error! Operation failed.")
-        panic(err)
-    }
+    errorHandler(err)
 
     _, err = file.WriteString("[" + title + "]" + "(" + url +")" + "\n")
+    errorHandler(err)
 
+    defer file.Close()
+}
+
+func errorHandler(err error)  {
     if err != nil {
         fmt.Println("Error! Operation failed.")
         panic(err)
     }
-
-    defer file.Close()
 }
