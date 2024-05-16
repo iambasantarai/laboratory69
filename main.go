@@ -2,17 +2,31 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
+    "github.com/charmbracelet/huh"
 )
 
 func main() {
+    var (
+        title string
+        url string
+    )
 
-    if len(os.Args) != 3 {
-       log.Fatalf("Error! Got more than expected arguments.\n") 
-    }
+    form := huh.NewForm(
+        huh.NewGroup(
+            huh.NewInput().
+                Title("Title").
+                Value(&title),
+            huh.NewInput().
+                Title("URL").
+                Value(&url),
+        ),
+    )
 
-    noteWriter(os.Args[1], os.Args[2])
+    err := form.Run()
+    errorHandler(err)
+
+    noteWriter(title, url)
 }
 
 func noteWriter(title string, url string) {
