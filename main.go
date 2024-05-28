@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
-    "github.com/charmbracelet/huh"
+
+	"github.com/charmbracelet/huh"
 )
 
 func main() {
@@ -63,28 +64,34 @@ func main() {
     case "link":
         err := linkForm.Run()
         errorHandler(err)
+        link := fmt.Sprintf("[%s](%s)\n", title, url)
+        writeToMarkdownFile(link)
+        break
     case "thought":
         err := thoughtForm.Run()
         errorHandler(err)
+        thought := fmt.Sprintf("> %s \n", thought)
+        writeToMarkdownFile(thought)
+        break
     case "shortNote":
         err := shortNoteForm.Run()
         errorHandler(err)
+        shortNote := fmt.Sprintf("### %s \n %s \n", title, content)
+        writeToMarkdownFile(shortNote)
+        break
     default:
         panic("Invalid Option!")
     }
-
-    linkWriter(title, url)
 }
 
-func linkWriter(title string, url string) {
-    filename := "/home/basanta/Code/termnote/termnote.md"
-    file, err := os.OpenFile(filename, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666) 
+func writeToMarkdownFile(content string) {
+    notes := "/home/basanta/Code/termnote/termnote.md"
+    file, err := os.OpenFile(notes, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666) 
     errorHandler(err)
-
-    _, err = file.WriteString("[" + title + "]" + "(" + url +")" + "\n")
-    errorHandler(err)
-
     defer file.Close()
+
+    _, err = file.WriteString(content)
+    errorHandler(err)
 }
 
 func errorHandler(err error)  {
