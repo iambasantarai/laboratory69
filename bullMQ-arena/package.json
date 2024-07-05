@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "producer": "node producer.js",
-    "worker": "node worker.js"
+    "worker": "node worker.js",
+    "prettier": "prettier --write \"./**/*.{js,json}\""
   },
   "keywords": [],
   "author": "",
@@ -12,5 +13,8 @@
   "description": "",
   "dependencies": {
     "bullmq": "^5.8.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.2"
   }
 }
