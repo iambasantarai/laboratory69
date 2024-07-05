@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "producer": "node producer.js",
-    "worker": "node worker.js",
+    "producer": "node src/producer.js",
+    "worker": "node src/worker.js",
     "prettier": "prettier --write \"./**/*.{js,json}\""
   },
   "keywords": [],
