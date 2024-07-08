@@ -4,7 +4,7 @@
   "description": "Hot Module Replacement Experiment",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "dev": "node server/hmr.js"
   },
   "keywords": [
     "hmr"
