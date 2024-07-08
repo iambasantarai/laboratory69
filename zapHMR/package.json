@@ -1,0 +1,14 @@
+{
+  "name": "zaphmr",
+  "version": "1.0.0",
+  "description": "Hot Module Replacement Experiment",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "hmr"
+  ],
+  "author": "Basanta Rai",
+  "license": "MIT"
+}
