@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "1-worker": "node index.js",
+    "4-workers": "node 4workers/index.js",
     "prettier": "prettier --write \"./**/*.{js,json}\""
   },
   "keywords": [],
