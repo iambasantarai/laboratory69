@@ -12,6 +12,6 @@ app.get('/heavy', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`PID : ${process.pid}`);
+  console.log(`Worker PID : ${process.pid}`);
   console.log(`Listening on http://localhost:${PORT}`);
 });
