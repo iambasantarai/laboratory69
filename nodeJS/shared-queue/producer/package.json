@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "producer": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -11,5 +11,8 @@
   "description": "",
   "devDependencies": {
     "prettier": "^3.3.2"
+  },
+  "dependencies": {
+    "bullmq": "^5.8.7"
   }
 }
