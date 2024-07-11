@@ -16,6 +16,7 @@
     "express": "^4.19.2"
   },
   "devDependencies": {
+    "loadtest": "^8.0.9",
     "prettier": "^3.3.2"
   }
 }
