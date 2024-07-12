@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "producer": "node index.js"
+    "worker": "node index.js"
   },
   "keywords": [],
   "author": "",

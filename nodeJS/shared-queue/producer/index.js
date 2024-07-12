@@ -26,10 +26,24 @@ async function init() {
     const batch = Math.floor(Math.random() * 100);
     const randomIndex = Math.floor(Math.random() * contents.length);
 
-    const res = await ingestionQueue.add('Ingest content to LLM', {
-      batch,
-      content: contents[randomIndex],
-    });
+    const res = await ingestionQueue.add(
+      'Ingest content to LLM',
+      {
+        batch,
+        content: contents[randomIndex],
+      },
+
+      {
+        removeOnComplete: {
+          age: 300, // keep up to 5 minutes
+          count: 10, // keep up to 1000 jobs
+        },
+        removeOnFail: {
+          age: 3600, // keep up to 1 hour
+          count: 5, // keep up to 5 jobs
+        },
+      },
+    );
 
     console.log(
       `BATCH[${batch}]: Job added to the queue for ingestion with id ${res.id} `,
@@ -39,4 +53,6 @@ async function init() {
   }
 }
 
-init();
+setInterval(() => {
+  init();
+}, 5 * 1000);
