@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node index.js",
+    "test": "jest",
     "format": "prettier --write \"./**/*.{js,json}\""
   },
   "keywords": [],
@@ -11,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "jest": "^29.7.0",
     "prettier": "^3.3.3"
   }
 }

@@ -1,1 +1,5 @@
-console.log('An experimental web crawler');
+function sum(a, b) {
+  return a + b;
+}
+
+module.exports = sum;
