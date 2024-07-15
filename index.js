@@ -1,1 +1,1 @@
-console.log("An experimental web crawler");
+console.log('An experimental web crawler');
