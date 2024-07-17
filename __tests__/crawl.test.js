@@ -1,5 +1,5 @@
 const { describe, test, expect } = require('@jest/globals');
-const { normalizeURL } = require('../src/crawl');
+const { normalizeURL, getURLsFromHTML } = require('../src/crawl');
 
 describe('normalize URL', () => {
   describe('strips the protocol from url', () => {
@@ -30,5 +30,83 @@ describe('normalize URL', () => {
     const result = normalizeURL(inputURL);
     const expected = 'basantarai.com.np/home';
     expect(result).toBe(expected);
+  });
+});
+
+describe('get URLs from html body', () => {
+  test('gets absolute urls', () => {
+    const inputHTML = `
+    <html>
+    <head>
+    <title></title>
+    </head>
+    <body>
+    <a href="https://github.com/iambasantarai">GitHub</a>
+    <a href="https://twitter.com/iambasantarai">Twitter</a>
+    </body>
+    </html>
+    `;
+    const inputURL = 'https://basantarai.com.np';
+    const result = getURLsFromHTML(inputHTML, inputURL);
+    const expected = [
+      'https://github.com/iambasantarai',
+      'https://twitter.com/iambasantarai',
+    ];
+    expect(result).toEqual(expected);
+  });
+
+  test('gets relative urls', () => {
+    const inputHTML = `
+    <html>
+    <head>
+    <title></title>
+    </head>
+    <body>
+    <a href="/about">Twitter</a>
+    </body>
+    </html>
+    `;
+    const inputURL = 'https://basantarai.com.np';
+    const result = getURLsFromHTML(inputHTML, inputURL);
+    const expected = ['https://basantarai.com.np/about'];
+    expect(result).toEqual(expected);
+  });
+
+  test('gets both absolute & relative urls', () => {
+    const inputHTML = `
+    <html>
+    <head>
+    <title></title>
+    </head>
+    <body>
+    <a href="https://github.com/iambasantarai">GitHub</a>
+    <a href="/about">Twitter</a>
+    </body>
+    </html>
+    `;
+    const inputURL = 'https://basantarai.com.np';
+    const result = getURLsFromHTML(inputHTML, inputURL);
+    const expected = [
+      'https://github.com/iambasantarai',
+      'https://basantarai.com.np/about',
+    ];
+    expect(result).toEqual(expected);
+  });
+
+  test('ignores invalid urls', () => {
+    const inputHTML = `
+    <html>
+    <head>
+    <title></title>
+    </head>
+    <body>
+    <a href="invalid">Invalid URL</a>
+    </body>
+    </html>
+    `;
+    const inputURL = 'https://basantarai.com.np';
+    const result = getURLsFromHTML(inputHTML, inputURL);
+    const expected = [];
+    expect(result).toEqual(expected);
   });
 });
