@@ -14,7 +14,11 @@ async function init() {
 
   console.log(`Crawling started for ${link}.`);
 
-  await crawlPage(link);
+  const pages = await crawlPage(link, link, {});
+
+  for (const page of Object.entries(pages)) {
+    console.log(page);
+  }
 }
 
 init();
