@@ -1,5 +1,6 @@
 const readline = require('node:readline');
 const { crawlPage } = require('./crawl');
+const { printReport } = require('./report');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -16,9 +17,7 @@ async function init() {
 
   const pages = await crawlPage(link, link, {});
 
-  for (const page of Object.entries(pages)) {
-    console.log(page);
-  }
+  printReport(pages);
 }
 
 init();
