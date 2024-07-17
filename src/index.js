@@ -1,4 +1,5 @@
 const readline = require('node:readline');
+const { crawlPage } = require('./crawl');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -11,7 +12,9 @@ async function init() {
   });
   rl.close();
 
-  console.log(`Crawling ${link}.`);
+  console.log(`Crawling started for ${link}.`);
+
+  await crawlPage(link);
 }
 
 init();
