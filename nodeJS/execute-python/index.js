@@ -48,13 +48,13 @@ function pythonDependenciesInstaller(callback) {
     });
 }
 
-function executePythonScript() {
+function executePythonScript(args) {
 
     const venvPythonPath = path.join(process.cwd(), 'python-scripts/venv/bin/python');
     const pythonScriptPath = path.join(process.cwd(), 'python-scripts/main.py');
 
     console.log('Executing Python script...');
-    const pythonExecuter = spawn(venvPythonPath, [pythonScriptPath]);
+    const pythonExecuter = spawn(venvPythonPath, [pythonScriptPath, ...args]);
 
     pythonExecuter.stdout.on('data', (data) => {
         console.log(data.toString());
@@ -71,5 +71,8 @@ function executePythonScript() {
 
 // Create virtual environment, install dependencies, and then execute the Python script
 createVirtualEnv(() => {
-    pythonDependenciesInstaller(executePythonScript);
+    pythonDependenciesInstaller( () => {
+        const args = ['-sk=secret', '-oc=old_collection', '-nc=new_collection']
+        executePythonScript(args)
+    });
 });
