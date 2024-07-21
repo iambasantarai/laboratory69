@@ -4,7 +4,7 @@ const { spawn, exec } = require('node:child_process');
 
 
 function createVirtualEnv(callback) {
-    const venvPath = path.join(process.cwd(), 'python-scripts/venv');
+    const venvPath = path.join(__dirname, 'python-scripts/venv');
 
     if (!fs.existsSync(venvPath)) {
         console.log('Creating virtual environment...');
@@ -29,7 +29,7 @@ function createVirtualEnv(callback) {
 }
 
 function pythonDependenciesInstaller(callback) {
-    const venvPath = path.join(process.cwd(), 'python-scripts/venv/bin/pip');
+    const venvPath = path.join(__dirname, 'python-scripts/venv/bin/pip');
 
     console.log('Installing dependencies...');
     exec(`${venvPath} install -r python-scripts/requirements.txt`, (error, stdout, stderr) => {
@@ -50,8 +50,8 @@ function pythonDependenciesInstaller(callback) {
 
 function executePythonScript(args) {
 
-    const venvPythonPath = path.join(process.cwd(), 'python-scripts/venv/bin/python');
-    const pythonScriptPath = path.join(process.cwd(), 'python-scripts/main.py');
+    const venvPythonPath = path.join(__dirname, 'python-scripts/venv/bin/python');
+    const pythonScriptPath = path.join(__dirname, 'python-scripts/main.py');
 
     console.log('Executing Python script...');
     const pythonExecuter = spawn(venvPythonPath, [pythonScriptPath, ...args]);
