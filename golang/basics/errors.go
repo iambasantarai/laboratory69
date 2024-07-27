@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func sendSMSToCouple(smsToCustomer, smsToSpouse string) (float64, error) {
     costOfCustomerSMS, err := sendSMS(smsToCustomer)
@@ -41,7 +44,7 @@ func (de divideError) Error() string {
 
 func divide(dividend, divisor float64) (float64, error) {
     if divisor == 0 {
-        return 0.0, divideError{dividend}
+        return 0.0, errors.New("Can not divide by zero.")
     }
 
     return dividend / divisor, nil
