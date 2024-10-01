@@ -1,5 +1,6 @@
 ## Table of content
 
+- [internals](https://github.com/iambasantarai/laboratory69/tree/main/nodeJS/internals)
 - [bullMQ-arena](https://github.com/iambasantarai/laboratory69/tree/main/nodeJS/bullMQ-arena)
 - [clusters](https://github.com/iambasantarai/laboratory69/tree/main/nodeJS/clusters)
 - [execute-python](https://github.com/iambasantarai/laboratory69/tree/main/nodeJS/execute-python)
