@@ -82,7 +82,15 @@ myEE.on("bar", (x) => {
 myEE.emit("foo");
 myEE.emit("foo");
 
+console.log("FOO event.");
+console.log(myEE.listenerCount("foo"));
+console.log(myEE.rawListeners("foo"));
+
 myEE.emit("bar");
 myEE.emit("bar", () => {
   console.log("Callback of bar event.");
 });
+
+console.log("BAR event.");
+console.log(myEE.listenerCount("bar"));
+console.log(myEE.rawListeners("bar"));
