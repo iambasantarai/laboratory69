@@ -1,4 +1,4 @@
-const { Buffer } = require("node:buffer");
+const { Buffer, constants } = require("node:buffer");
 
 // creates a zero-filled Buffer of length 4
 const memoryContainer = Buffer.alloc(4); // 4 bytes (32 bits)
@@ -40,3 +40,22 @@ console.log("Allocated length for anotherBuff2: ", anotherBuff2.length);
 
 const devanagariBuff = Buffer.from("E0A598", "hex");
 console.log(devanagariBuff.toString("utf8"));
+
+console.log("CONSTANT: ", constants.MAX_LENGTH);
+
+const oneGBBuffer = Buffer.alloc(1e9);
+setInterval(() => {
+  // for (let index = 0; index < oneGBBuffer.length; index++) {
+  //   oneGBBuffer[index] = 0xff;
+  // }
+  oneGBBuffer.fill(0xe0);
+}, 1000);
+
+/* 
+MiB(mebibyte)
+1 MegaByte (MB) = 1000 * 1000 bytes
+1 MebiByte (MiB) = 1024 * 1024 bytes
+
+1 GigaByte (GB) = 1000 * 1000 * 1000 bytes
+1 GibiByte (GB) = 1024 * 1024 * 1024 bytes
+*/
