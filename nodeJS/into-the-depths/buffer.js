@@ -51,6 +51,22 @@ setInterval(() => {
   oneGBBuffer.fill(0xe0);
 }, 1000);
 
+const unsafeBuff = Buffer.allocUnsafe(100);
+for (let index = 0; index < unsafeBuff.length; index++) {
+  if (unsafeBuff[index] !== 0) {
+    console.log(
+      `Element at position ${i} has the value ${unsafeBuff[i].toString(2)}`,
+    );
+  }
+}
+
+const unsafeSlowBuff = Buffer.allocUnsafeSlow(2);
+
+console.log("BUFFER POOLSIZE: ", Buffer.poolSize >>> 1);
+
+// Buffer.from();
+// Buffer.concat();
+
 /* 
 MiB(mebibyte)
 1 MegaByte (MB) = 1000 * 1000 bytes
