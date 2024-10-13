@@ -1,0 +1,21 @@
+{
+  "name": "link-lurker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node src/index.js",
+    "test": "jest",
+    "format": "prettier --write \"./**/*.{js,json}\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "jsdom": "^24.1.0"
+  }
+}
