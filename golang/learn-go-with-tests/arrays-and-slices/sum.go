@@ -1,11 +1,12 @@
 package arraysandslices
 
 func Sum(numbers [5]int) int {
-	var total int
-	for i := 0; i < len(numbers); i++ {
-		total += numbers[i]
+	sum := 0
+
+	for _, number := range numbers {
+		sum += number
 	}
-	return total
+	return sum
 }
 
 func main() {
