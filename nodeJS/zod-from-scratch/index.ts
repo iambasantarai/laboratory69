@@ -1,7 +1,26 @@
-type ZodType = ZodUnknown | ZodString | ZodNumber;
-type ZodUnknown = { type: "unknown" };
-type ZodString = { type: "string" };
-type ZodNumber = { type: "number" };
+type ZodType = ZodUnknown | ZodString | ZodNumber | ZodArray<ZodType>;
+
+interface ZodUnknown {
+  type: "unknown";
+}
+
+interface ZodString {
+  type: "string";
+}
+
+interface ZodNumber {
+  type: "number";
+}
+
+interface ZodArray<T extends ZodType> {
+  type: "array";
+  element: T;
+}
+
+interface ZodObject<T extends Record<string, ZodType>> {
+  type: "object";
+  fields: T;
+}
 
 type Infer<T extends ZodType> = T extends ZodUnknown
   ? unknown
@@ -9,8 +28,12 @@ type Infer<T extends ZodType> = T extends ZodUnknown
     ? string
     : T extends ZodNumber
       ? number
-      : "invalid type";
+      : T extends ZodArray<infer E>
+        ? Array<Infer<E>>
+        : T extends ZodObject<Record<string, ZodType>>
+          ? InferZodObject<T>
+          : "invalid type";
 
-type result1 = Infer<ZodUnknown>;
-type result2 = Infer<ZodString>;
-type result3 = Infer<ZodNumber>;
+type InferZodObject<T extends ZodObject<Record<string, ZodType>>> = {
+  [key in keyof T["fields"]]: Infer<T["fields"][key]>;
+};
