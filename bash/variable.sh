@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo script: $0
 echo host: $HOSTNAME
 
