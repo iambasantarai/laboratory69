@@ -1,6 +1,7 @@
 #!/bin/bash
-echo Tell me your name.
 
-read name
+read -p 'Username: ' username
+read -sp 'Password: ' password
+echo
 
-echo Oh. you are $name
+echo $username your credentials are saved.
