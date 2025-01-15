@@ -18,3 +18,9 @@ echo It is also possible, steps in a loop
 for j in {69..0..5}; do
     echo $j
 done
+
+echo
+echo A range alternative
+for ((num = 1; num <= 5; num++)); do
+    echo $num
+done
