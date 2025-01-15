@@ -6,3 +6,9 @@ for number in $numbers; do
 done
 
 echo Numbers printed
+
+echo
+echo Using range
+for i in {1..10}; do
+    echo $i
+done
