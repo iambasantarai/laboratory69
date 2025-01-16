@@ -1,7 +1,9 @@
 #!/bin/bash
 
-print_fn() {
-    echo "A print function"
+greet() {
+    echo "$1 $2, from greet fn"
 }
 
-print_fn
+greet Namaste John
+greet Sewa Layla
+greet Ola Cristin
