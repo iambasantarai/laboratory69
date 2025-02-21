@@ -1,0 +1,9 @@
+FROM rabbitmq:4.0-management-alpine
+
+ENV RABBITMQ_DEFAULT_USER=rmq_usr
+ENV RABBITMQ_DEFAULT_PASS=rmq_pass
+ENV RABBITMQ_DEFAULT_VHOST=/
+
+EXPOSE 5672 15672
+
+CMD ["rabbitmq-server"]
