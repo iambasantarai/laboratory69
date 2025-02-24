@@ -5,11 +5,16 @@ async function receiveMail() {
     const connection = await amqp.connect("amqp://rmq_usr:rmq_pass@localhost");
     const channel = await connection.createChannel();
 
-    await channel.assertQueue("mail_queue", { durable: false });
+    await channel.assertQueue("send_mail_to_normal_users", {
+      durable: false,
+    });
 
-    channel.consume("mail_queue", (msg) => {
+    channel.consume("send_mail_to_normal_users", (msg) => {
       if (msg !== null) {
-        console.log("Received message ", JSON.parse(msg.content));
+        console.log(
+          "Received message for normal user: ",
+          JSON.parse(msg.content),
+        );
         channel.ack(msg);
       }
     });
