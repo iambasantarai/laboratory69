@@ -1,0 +1,17 @@
+{
+  "name": "topic-exchange",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "producer": "node producer.js",
+    "order-service": "node orderNotificationService.js",
+    "payment-service": "node paymentNotificationService.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "amqplib": "^0.10.5"
+  }
+}
