@@ -5,7 +5,7 @@ services:
     image: mysql:8.0
     container_name: mysqldb
     volumes:
-      - ./storage/mysql:/var/lib/mysql/data
+      - ./storage/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
