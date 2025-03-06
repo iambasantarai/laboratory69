@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: pgdb
+    volumes:
+      - ./storage/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      TZ: Asia/Kathmandu
+    ports:
+      - 5432:5432
