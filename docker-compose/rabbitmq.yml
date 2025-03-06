@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    image: rabbitmq:4.0-management-alpine
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: rmq_usr
+      RABBITMQ_DEFAULT_PASS: rmq_pass
+      RABBITMQ_DEFAULT_VHOST: /
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./storage/rabbitmq:/var/lib/rabbitmq
