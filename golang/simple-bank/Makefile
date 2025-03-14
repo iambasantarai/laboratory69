@@ -13,15 +13,25 @@ dropdb:
 migrateup:
 	migrate -path db/migration -database "postgresql://postgres:postgres@localhost/simple_bank?sslmode=disable" -verbose up
 
+migrateup1:
+	migrate -path db/migration -database "postgresql://postgres:postgres@localhost/simple_bank?sslmode=disable" -verbose up 1
+
 migratedown:
 	migrate -path db/migration -database "postgresql://postgres:postgres@localhost/simple_bank?sslmode=disable" -verbose down
+
+migratedown1:
+	migrate -path db/migration -database "postgresql://postgres:postgres@localhost/simple_bank?sslmode=disable" -verbose down 1
+
 sqlc:
 	sqlc generate
+
 test:
 	go test -v -cover ./... 
+
 server:
 	go run main.go
+
 mock:
 	mockgen -package mockdb -destination db/mock/store.go simple-bank/db/sqlc Store
 
-.PHONY: postgres start-postgres createdb dropdb migrateup migratedown sqlc test server mock
+.PHONY: postgres start-postgres createdb dropdb migrateup migrateup1 migratedown migratedown1 sqlc test server mock
