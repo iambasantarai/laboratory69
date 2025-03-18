@@ -6,3 +6,4 @@
 - [testify](https://github.com/stretchr/testify)
 - [validator](github.com/go-playground/validator)
 - [mock](https://github.com/golang/mock)
+- [wait-for](https://github.com/eficode/wait-for)
