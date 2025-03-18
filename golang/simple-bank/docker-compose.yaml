@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: pg_db
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=r00T
+      - POSTGRES_DB=simple_bank
+  api:
+    container_name: simple_bank_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_SOURCE=postgresql://root:r00T@postgres:5432/simple_bank?sslmode=disable
