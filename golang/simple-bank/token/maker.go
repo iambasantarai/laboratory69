@@ -8,7 +8,7 @@ type Maker interface {
 	CreateToken(
 		username string,
 		duration time.Duration,
-	) (string, error)
+	) (string, *Payload, error)
 
 	// VerifyToken check if the token is valid or not
 	VerifyToken(token string) (*Payload, error)
