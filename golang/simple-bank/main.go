@@ -4,16 +4,16 @@ import (
 	"database/sql"
 	"log"
 	"net"
+	"simple-bank/api"
+	"simple-bank/gapi"
+	"simple-bank/pb"
+	"simple-bank/util"
 
 	_ "github.com/lib/pq"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	"simple-bank/api"
 	db "simple-bank/db/sqlc"
-	"simple-bank/gapi"
-	"simple-bank/pb"
-	"simple-bank/util"
 )
 
 func main() {
