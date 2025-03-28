@@ -48,4 +48,7 @@ proto:
     --go-grpc_out=pb --go-grpc_opt=paths=source_relative \
     proto/*.proto
 
-.PHONY: postgres start-postgres createdb dropdb migrateup migrateup1 migratedown migratedown1 sqlc test server mock db-docs db-schema proto
+evans:
+	evans --host localhost --port 9090 -r repl
+
+.PHONY: postgres start-postgres createdb dropdb migrateup migrateup1 migratedown migratedown1 sqlc test server mock db-docs db-schema proto evans
