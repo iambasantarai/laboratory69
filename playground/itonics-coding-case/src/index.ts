@@ -1,1 +1,1 @@
-console.log("Ignite with typescript.\n");
+console.log('Ignite with typescript.\n');
