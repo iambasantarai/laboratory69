@@ -9,8 +9,9 @@ export const datasourceOptions: DataSourceOptions = {
   username: dbConfig.user,
   password: dbConfig.password,
   database: dbConfig.database,
-  entities: [join(__dirname, '../**/**/*.entity.{ts,js}')],
-  migrations: [join(__dirname, '../db/migrations/*.{ts,js}')],
+  entities: [join(__dirname, '../../**/**/*.entity.{ts,js}')],
+  migrations: [join(__dirname, '../migrations/*.{ts,js}')],
+  synchronize: false,
   migrationsTableName: 'migrations'
 };
 
