@@ -32,6 +32,9 @@ export class WebzIOService {
 
         const posts = data.posts;
 
+        /* TODO: Implement bulk inserts instead of individual saves to reduce
+         * database write operations
+         */
         // Use promise to handle asynchronous operation
         const storePromises = posts.map(async (post) => {
           try {
