@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-import { DataSource, DataSourceOptions } from 'typeorm';
+import { DataSourceOptions } from 'typeorm';
 import { dbConfig } from '../../utils/env.util';
 
 export const datasourceOptions: DataSourceOptions = {
@@ -14,6 +14,3 @@ export const datasourceOptions: DataSourceOptions = {
   synchronize: false,
   migrationsTableName: 'migrations'
 };
-
-const dataSource = new DataSource(datasourceOptions);
-export default dataSource;

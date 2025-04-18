@@ -1,32 +1,27 @@
-import axios from 'axios';
-import { apiConfig } from './utils/env.util';
-import dataSource from './db/config/typeorm.config';
+import 'reflect-metadata';
+import { DataSource } from 'typeorm';
+import { WebzIOService } from './services/webzio.service';
 import logger from './utils/log.util';
+import { datasourceOptions } from './db/config/typeorm.config';
 
-async function fetchPosts() {
-  const apiURI =
-    apiConfig.url +
-    '?token=' +
-    apiConfig.token +
-    '&q=Google%20topic%3A%22financial%20and%20economic%20news%22%20sentiment%3Anegative';
+async function main() {
+  const dataSource = new DataSource(datasourceOptions);
 
   try {
-    const response = await axios.get(apiURI);
-    console.log('::: response :::');
-    console.log(response.data);
-    console.log('::: response :::');
+    logger.info('Establishing database connection.');
+    await dataSource.initialize();
+    logger.info('Database connection has been established.');
+
+    // Create services after database is initialized
+    const webzioService = new WebzIOService(dataSource);
+
+    await webzioService.fetchAndStorePosts();
   } catch (error) {
-    logger.error(error);
+    logger.error('Failed to fetch posts.\nERROR: ', error);
+  } finally {
+    logger.info('Database connection has been destroyed.');
+    await dataSource.destroy();
   }
 }
 
-dataSource
-  .initialize()
-  .then(() => {
-    logger.info('Datasource has been initialized.');
-  })
-  .catch((error) => {
-    logger.error(error);
-  });
-
-fetchPosts();
+main();

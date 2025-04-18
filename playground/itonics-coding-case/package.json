@@ -2,11 +2,11 @@
   "name": "itonics-coding-case",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "tsc",
     "nuke": "rimraf dist",
-    "ignite": "node ./dist/index.js",
+    "fetch-and-store": "node ./dist/index.js",
     "format:check": "prettier --check \"./**/*.{js,ts}\"",
     "format:fix": "prettier --write \"./**/*.{js,ts}\"",
     "typeorm": "npx ts-node ./node_modules/typeorm/cli.js",
