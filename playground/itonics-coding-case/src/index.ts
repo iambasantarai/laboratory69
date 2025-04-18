@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { apiConfig } from './utils/env.util';
 import dataSource from './db/config/typeorm.config';
+import logger from './utils/log.util';
 
 async function fetchPosts() {
   const apiURI =
@@ -15,17 +16,17 @@ async function fetchPosts() {
     console.log(response.data);
     console.log('::: response :::');
   } catch (error) {
-    console.log('ERROR: ', error);
+    logger.error(error);
   }
 }
 
 dataSource
   .initialize()
   .then(() => {
-    console.log('] Connected to database.');
+    logger.info('Datasource has been initialized.');
   })
   .catch((error) => {
-    console.log('ERROR: ', error);
+    logger.error(error);
   });
 
 fetchPosts();
