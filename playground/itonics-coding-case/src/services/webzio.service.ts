@@ -20,24 +20,38 @@ export class WebzIOService {
   }
 
   async fetchAndStorePosts() {
+    let totalSaved = 0;
+    let nextCursor: string | null = null;
+    let totalResults = 0;
+
     try {
-      logger.info('Fetching posts from Webz.io');
-      const { data } = await axios.get<ResponseType>(this.apiURI);
+      logger.info('Fetching & storing posts from Webz.io');
+      do {
+        const { data } = await axios.get<ResponseType>(this.apiURI);
+        totalResults = data.totalResults;
 
-      const posts = data.posts;
+        const posts = data.posts;
 
-      // Use promise to handle asynchronous operation
-      const storePromises = posts.map(async (post) => {
-        try {
-          await this.storePost(post);
+        // Use promise to handle asynchronous operation
+        const storePromises = posts.map(async (post) => {
+          try {
+            await this.storePost(post);
 
-          logger.info(`Successfully stored post: ${post.uuid}`);
-        } catch (storeError) {
-          logger.error(`Failed to store post.\nERROR: `, storeError);
-        }
-      });
+            logger.info(`Successfully stored post: ${post.uuid}`);
+          } catch (storeError) {
+            logger.error(`Failed to store post.\nERROR: `, storeError);
+          }
+        });
 
-      await Promise.all(storePromises);
+        await Promise.all(storePromises);
+
+        totalSaved += posts.length;
+        nextCursor = data.moreResultsAvailable ? data.next : null;
+
+        logger.info(
+          `Successfully processed ${totalSaved} out of ${totalResults}, ${totalResults - totalSaved} posts remaining.`
+        );
+      } while (nextCursor && totalSaved < totalResults);
     } catch (error) {
       logger.error('Failed to fetch posts.\nERROR: ', error);
       throw error;
