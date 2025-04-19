@@ -42,7 +42,7 @@ export class Post extends AbstractEntity {
   @Column({ type: 'varchar' })
   language: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   sentiment: string;
 
   @Column({ type: 'text', array: true, default: [] })
