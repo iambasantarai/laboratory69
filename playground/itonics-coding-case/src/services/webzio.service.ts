@@ -19,7 +19,10 @@ export class WebzIOService {
     this.postService = new PostService(dataSource);
   }
 
-  async fetchAndStorePosts() {
+  /**
+   * Fetches posts from webz.io and stores them to database
+   */
+  async fetchAndStorePosts(): Promise<void> {
     let totalSaved = 0;
     let nextCursor: string | null = null;
     let totalResults = 0;
@@ -51,7 +54,7 @@ export class WebzIOService {
         totalSaved += posts.length;
         nextCursor = data.moreResultsAvailable ? data.next : null;
 
-        logger.info(
+        logger.warn(
           `Successfully processed ${totalSaved} out of ${totalResults}, ${totalResults - totalSaved} posts remaining.`
         );
       } while (nextCursor && totalSaved < totalResults);
