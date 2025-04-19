@@ -6,15 +6,11 @@ import { PostService } from './post.service';
 import { DataSource } from 'typeorm';
 
 export class WebzIOService {
-  private apiURI: string;
+  private apiBaseURI: string;
   private postService: PostService;
 
   constructor(dataSource: DataSource) {
-    this.apiURI =
-      apiConfig.url +
-      '?token=' +
-      apiConfig.token +
-      '&q=Google%20topic%3A%22financial%20and%20economic%20news%22%20sentiment%3Anegative';
+    this.apiBaseURI = apiConfig.url;
 
     this.postService = new PostService(dataSource);
   }
@@ -27,10 +23,17 @@ export class WebzIOService {
     let nextCursor: string | null = null;
     let totalResults = 0;
 
+    const initialURL = `${this.apiBaseURI}/newsApiLite?token=${apiConfig.token}&q=Google%20topic%3A%22financial%20and%20economic%20news%22%20sentiment%3Anegative`;
+
     try {
       logger.info('Fetching & storing posts from Webz.io');
+
       do {
-        const { data } = await axios.get<ResponseType>(this.apiURI);
+        const makeRequestTo: string = nextCursor
+          ? this.apiBaseURI + nextCursor
+          : initialURL;
+
+        const { data } = await axios.get<ResponseType>(makeRequestTo, {});
         totalResults = data.totalResults;
 
         const posts = data.posts;
@@ -52,7 +55,7 @@ export class WebzIOService {
         await Promise.all(storePromises);
 
         totalSaved += posts.length;
-        nextCursor = data.moreResultsAvailable ? data.next : null;
+        nextCursor = data.next;
 
         logger.warn(
           `Successfully processed ${totalSaved} out of ${totalResults}, ${totalResults - totalSaved} posts remaining.`
