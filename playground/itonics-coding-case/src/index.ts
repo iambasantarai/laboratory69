@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { WebzIOService } from './services/webzio.service';
 import logger from './utils/log.util';
-import { datasourceOptions } from './db/config/typeorm.config';
+import { datasourceOptions } from './config/typeorm.config';
 
 async function main() {
   const dataSource = new DataSource(datasourceOptions);
