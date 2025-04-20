@@ -4,42 +4,55 @@ import { Post } from '../../entities/post.entity';
 import { PostService } from '../../services/post.service';
 import { fakePost } from '../../utils/fake.util';
 
-const createMock = jest.fn();
-const saveMock = jest.fn();
-
-const mockRepository = {
-  create: createMock,
-  save: saveMock
-} as unknown as jest.Mock<Repository<Post>>;
-
-const mockDataSource = {
-  getRepository: jest.fn().mockReturnValue(mockRepository)
-} as unknown as DataSource;
-
 describe('PostService', () => {
-  let postService: PostService;
+  let service: PostService;
+  let mockRepository: jest.Mocked<Repository<Post>>;
 
   beforeEach(() => {
-    // reset mocks
     jest.clearAllMocks();
-    postService = new PostService(mockDataSource);
+
+    // Create a partial mock for repository methods
+    mockRepository = {
+      create: jest.fn(),
+      save: jest.fn()
+    } as unknown as jest.Mocked<Repository<Post>>;
+
+    // Create a mock data source using mock repository
+    const mockDataSource = {
+      getRepository: jest.fn().mockReturnValue(mockRepository)
+    } as unknown as DataSource;
+
+    service = new PostService(mockDataSource);
   });
 
-  it('should create and save a post', async () => {
-    // setups
-    const postData: Partial<Post> = fakePost();
-    const createdPost = postData as Post;
+  describe('create', () => {
+    it('should create and save a post', async () => {
+      // setups
+      const postData: Partial<Post> = fakePost();
+      const mockPost = postData as Post;
 
-    createMock.mockReturnValue(createdPost);
-    saveMock.mockResolvedValue(createdPost);
+      // operations
+      mockRepository.create.mockReturnValue(mockPost as Post);
+      mockRepository.save.mockResolvedValue(mockPost as Post);
 
-    // operations
-    const result = await postService.create(postData);
+      const result = await service.create(postData);
 
-    // assertions
-    expect(createMock).toHaveBeenCalledWith(postData);
-    expect(saveMock).toHaveBeenCalledWith(createdPost);
+      // assertions
+      expect(mockRepository.create).toHaveBeenCalledWith(postData);
+      expect(mockRepository.save).toHaveBeenCalledWith(mockPost);
+      expect(result).toEqual(mockPost);
+    });
 
-    expect(result).toEqual(createdPost);
+    it('should throw error when save fails', async () => {
+      // setups
+      const postData = fakePost();
+
+      // operations
+      mockRepository.create.mockReturnValue(postData as Post);
+      mockRepository.save.mockRejectedValue(new Error('Save failed'));
+
+      // assertions
+      await expect(service.create(postData)).rejects.toThrow('Save failed');
+    });
   });
 });
