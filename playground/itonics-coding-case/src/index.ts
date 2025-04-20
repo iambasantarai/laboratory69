@@ -1,11 +1,13 @@
 import 'reflect-metadata';
-import { DataSource } from 'typeorm';
 import { WebzIOService } from './services/webzio.service';
 import logger from './utils/log.util';
-import { datasourceOptions } from './config/typeorm.config';
+import { WebzQueryBuilder } from './builders/webzioquery.builder';
+import dataSource from './config/typeorm.config';
 
 async function main() {
-  const dataSource = new DataSource(datasourceOptions);
+  const query = new WebzQueryBuilder()
+    .query('Google topic:"financial and economic news" sentiment:negative')
+    .build();
 
   try {
     logger.info('Establishing database connection.');
@@ -15,7 +17,7 @@ async function main() {
     // Create services after database is initialized
     const webzioService = new WebzIOService(dataSource);
 
-    await webzioService.fetchAndStorePosts();
+    await webzioService.fetchAndStorePosts(query);
   } catch (error) {
     logger.error('Failed to fetch posts.\nERROR: ', error);
   } finally {

@@ -5,6 +5,7 @@ import { PostService } from '../../services/post.service';
 import { fakePost } from '../../utils/fake.util';
 import { WebzIOService } from '../../services/webzio.service';
 import { ResponseType } from '../../types/webzio.type';
+import { WebzQueryBuilder } from '../../builders/webzioquery.builder';
 
 jest.mock('axios');
 jest.mock('../../services/post.service');
@@ -31,6 +32,12 @@ describe('WebzIOService', () => {
   describe('fetchAndStorePosts', () => {
     it('should fetch and store posts successfully from single page', async () => {
       // setups
+      const query = new WebzQueryBuilder()
+        .query(
+          'Effect of sofrware development job market in Nepal due to rise of Generative AI coding applications.'
+        )
+        .build();
+
       const fakePosts = [fakePost(), fakePost()];
       const mockResponse: ResponseType = {
         posts: fakePosts,
@@ -47,19 +54,24 @@ describe('WebzIOService', () => {
       mockedPostService.prototype.create.mockResolvedValue({} as any);
 
       // operations
-      await service.fetchAndStorePosts();
+      await service.fetchAndStorePosts(query);
 
       // assertions
       expect(mockedAxios.get).toHaveBeenCalledTimes(1);
       expect(mockedAxios.get).toHaveBeenCalledWith(
-        expect.stringContaining('newsApiLite'),
-        {}
+        expect.stringContaining('newsApiLite')
       );
       expect(mockedPostService.prototype.create).toHaveBeenCalledTimes(2);
     });
 
     it('should handle pagination', async () => {
       // setups
+      const query = new WebzQueryBuilder()
+        .query(
+          'Effect of sofrware development job market in Nepal due to rise of Generative AI coding applications.'
+        )
+        .build();
+
       const fakePosts = [fakePost(), fakePost()];
       const mockResponse1: ResponseType = {
         posts: fakePosts,
@@ -87,14 +99,13 @@ describe('WebzIOService', () => {
       mockedPostService.prototype.create.mockResolvedValue({} as any);
 
       // operations
-      await service.fetchAndStorePosts();
+      await service.fetchAndStorePosts(query);
 
       // assertions
       expect(mockedAxios.get).toHaveBeenCalledTimes(2);
       expect(mockedAxios.get).toHaveBeenNthCalledWith(
         2,
-        expect.stringContaining('/newsApiLite'),
-        {}
+        expect.stringContaining('/newsApiLite')
       );
     });
 

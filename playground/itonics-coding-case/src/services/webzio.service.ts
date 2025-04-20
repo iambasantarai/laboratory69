@@ -18,48 +18,62 @@ export class WebzIOService {
   /**
    * Fetches posts from webz.io and stores them to database
    */
-  async fetchAndStorePosts(): Promise<void> {
+  async fetchAndStorePosts(queryParams: any): Promise<void> {
     let totalSaved = 0;
     let nextCursor: string | null = null;
     let totalResults = 0;
 
-    const initialURL = `${this.apiBaseURI}/newsApiLite?token=${apiConfig.token}&q=Google%20topic%3A%22financial%20and%20economic%20news%22%20sentiment%3Anegative`;
+    // Build initial URL with query params
+    const buildInitialUrl = () => {
+      const baseUrl = `${this.apiBaseURI}/newsApiLite`;
+      const params = new URLSearchParams({
+        token: apiConfig.token,
+        ...queryParams
+      });
+      return `${baseUrl}?${params}`;
+    };
 
     try {
       logger.info('Fetching & storing posts from Webz.io');
 
       do {
-        const makeRequestTo: string = nextCursor
+        const url: string = nextCursor
           ? this.apiBaseURI + nextCursor
-          : initialURL;
+          : buildInitialUrl();
 
-        const { data } = await axios.get<ResponseType>(makeRequestTo, {});
-        totalResults = data.totalResults;
+        try {
+          const { data } = await axios.get<ResponseType>(url);
 
-        const posts = data.posts;
+          totalResults = data.totalResults;
 
-        /* TODO: Implement bulk inserts instead of individual saves to reduce
-         * database write operations
-         */
-        // Use promise to handle asynchronous operation
-        const storePromises = posts.map(async (post) => {
-          try {
-            await this.storePost(post);
+          const posts = data.posts;
 
-            logger.info(`Successfully stored post: ${post.uuid}`);
-          } catch (storeError) {
-            logger.error(`Failed to store post.\nERROR: `, storeError);
-          }
-        });
+          /* TODO: Implement bulk inserts instead of individual saves to reduce
+           * database write operations
+           */
+          // Use promise to handle asynchronous operation
+          const storePromises = posts.map(async (post) => {
+            try {
+              await this.storePost(post);
 
-        await Promise.all(storePromises);
+              logger.info(`Successfully stored post: ${post.uuid}`);
+            } catch (storeError) {
+              logger.error(`Failed to store post.\nERROR: `, storeError);
+            }
+          });
 
-        totalSaved += posts.length;
-        nextCursor = data.next;
+          await Promise.all(storePromises);
 
-        logger.warn(
-          `Successfully processed ${totalSaved} out of ${totalResults}, ${totalResults - totalSaved} posts remaining.`
-        );
+          totalSaved += posts.length;
+          nextCursor = data.next;
+
+          logger.warn(
+            `Successfully processed ${totalSaved} out of ${totalResults}, ${totalResults - totalSaved} posts remaining.`
+          );
+        } catch (error) {
+          logger.error('Error while calling api.\nERROR: ', error);
+          throw error;
+        }
       } while (nextCursor && totalSaved < totalResults);
     } catch (error) {
       logger.error('Failed to fetch posts.\nERROR: ', error);
