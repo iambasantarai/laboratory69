@@ -1,6 +1,7 @@
 import { join } from 'node:path';
 import { DataSourceOptions } from 'typeorm';
 import { dbConfig } from '../utils/env.util';
+import { DataSource } from 'typeorm';
 
 export const datasourceOptions: DataSourceOptions = {
   type: 'postgres',
@@ -14,3 +15,6 @@ export const datasourceOptions: DataSourceOptions = {
   synchronize: false,
   migrationsTableName: 'migrations'
 };
+
+const dataSource = new DataSource(datasourceOptions);
+export default dataSource;
