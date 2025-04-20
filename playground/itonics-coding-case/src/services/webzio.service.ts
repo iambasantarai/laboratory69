@@ -1,7 +1,7 @@
 import axios from 'axios';
 import logger from '../utils/log.util';
 import { apiConfig } from '../utils/env.util';
-import { PostType, ResponseType } from '../types/webzioresponse.type';
+import { PostType, ResponseType } from '../types/webzio.type';
 import { PostService } from './post.service';
 import { DataSource } from 'typeorm';
 

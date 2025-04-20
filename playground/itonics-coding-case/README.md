@@ -52,7 +52,9 @@ Check if moreResultsAvailable ----------o
 
 ### References
 
-- [News API Lite](https://docs.webz.io/reference/news-api-lite)
+- [webz.io - News API Lite](https://docs.webz.io/reference/news-api-lite)
 - [Configuring Jest](https://jestjs.io/docs/configuration)
 - [Mock Functions](https://jestjs.io/docs/mock-function-api)
 - [Mocking Axios in Jest + Testing Async Functions](https://www.youtube.com/watch?v=9Yrd4aZkse8)
+- [Builder](https://refactoring.guru/design-patterns/builder)
+- [webz.io - GET Parameters](https://docs.webz.io/reference/get-parameters)

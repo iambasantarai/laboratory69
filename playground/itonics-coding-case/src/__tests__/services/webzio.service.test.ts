@@ -4,7 +4,7 @@ import { DataSource } from 'typeorm';
 import { PostService } from '../../services/post.service';
 import { fakePost } from '../../utils/fake.util';
 import { WebzIOService } from '../../services/webzio.service';
-import { ResponseType } from '../../types/webzioresponse.type';
+import { ResponseType } from '../../types/webzio.type';
 
 jest.mock('axios');
 jest.mock('../../services/post.service');

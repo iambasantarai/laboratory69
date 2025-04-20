@@ -30,3 +30,9 @@ export type ResponseType = {
   requestsLeft: number;
   warnings: string | null;
 };
+
+export interface WebzQuery {
+  q?: string;
+  sort?: string;
+  order?: string;
+}
