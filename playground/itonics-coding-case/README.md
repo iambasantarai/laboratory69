@@ -55,3 +55,4 @@ Check if moreResultsAvailable ----------o
 - [News API Lite](https://docs.webz.io/reference/news-api-lite)
 - [Configuring Jest](https://jestjs.io/docs/configuration)
 - [Mock Functions](https://jestjs.io/docs/mock-function-api)
+- [Mocking Axios in Jest + Testing Async Functions](https://www.youtube.com/watch?v=9Yrd4aZkse8)
