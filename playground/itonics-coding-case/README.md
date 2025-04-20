@@ -46,9 +46,12 @@ Check if moreResultsAvailable ----------o
 - [Typescript](https://www.typescriptlang.org/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [TypeORM](https://typeorm.io/)
+- [JEST](https://jestjs.io/docs/mock-function-api)
 
 ### Getting Started
 
 ### References
 
 - [News API Lite](https://docs.webz.io/reference/news-api-lite)
+- [Configuring Jest](https://jestjs.io/docs/configuration)
+- [Mock Functions](https://jestjs.io/docs/mock-function-api)
