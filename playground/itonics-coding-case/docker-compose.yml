@@ -1,19 +1,21 @@
 services:
-  webzio_pg_db:
+  db:
     image: postgres:16-alpine
     container_name: pg_db
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=r00T
-      - POSTGRES_DB=itonics_coding_case_db
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
     ports:
-      - '5433:5433'
-  webzio_svc:
-    container_name: fns_svc
+      - ${DB_PORT}:${DB_PORT}
+    env_file:
+      - .env
+  app:
+    container_name: fetch_and_store_svc
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - webzio_pg_db
+      - db
     env_file:
       - .env
