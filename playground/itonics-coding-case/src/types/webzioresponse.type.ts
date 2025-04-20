@@ -26,7 +26,7 @@ export type ResponseType = {
   posts: Array<PostType>;
   totalResults: number;
   moreResultsAvailable: number;
-  next: string;
+  next: string | null;
   requestsLeft: number;
-  warnings: string;
+  warnings: string | null;
 };

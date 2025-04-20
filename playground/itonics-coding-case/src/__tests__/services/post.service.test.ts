@@ -2,7 +2,7 @@ import { describe, expect } from '@jest/globals';
 import { DataSource, Repository } from 'typeorm';
 import { Post } from '../../entities/post.entity';
 import { PostService } from '../../services/post.service';
-import { fakePost } from '../../utils/fake.util';
+import { fakeSerializedPost } from '../../utils/fake.util';
 
 describe('PostService', () => {
   let service: PostService;
@@ -28,7 +28,7 @@ describe('PostService', () => {
   describe('create', () => {
     it('should create and save a post', async () => {
       // setups
-      const postData: Partial<Post> = fakePost();
+      const postData: Partial<Post> = fakeSerializedPost();
       const mockPost = postData as Post;
 
       // operations
@@ -45,7 +45,7 @@ describe('PostService', () => {
 
     it('should throw error when save fails', async () => {
       // setups
-      const postData = fakePost();
+      const postData: Partial<Post> = fakeSerializedPost();
 
       // operations
       mockRepository.create.mockReturnValue(postData as Post);

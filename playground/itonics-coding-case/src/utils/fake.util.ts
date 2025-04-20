@@ -9,7 +9,7 @@ function fakeJSONB() {
 
 export function fakePost() {
   return {
-    post_id: faker.string.uuid(),
+    uuid: faker.string.uuid(),
     thread: fakeJSONB(),
     url: faker.internet.url(),
     ord_in_thread: faker.number.int({ min: 0, max: 69 }),
@@ -18,9 +18,9 @@ export function fakePost() {
     published: faker.date.past(),
     title: faker.lorem.sentence(),
     text: faker.lorem.paragraph(),
-    highlight_title: faker.lorem.sentence(),
-    highlight_text: faker.lorem.sentence(),
-    highlight_thread_title: faker.lorem.sentence(),
+    highlightTitle: faker.lorem.sentence(),
+    highlightText: faker.lorem.sentence(),
+    highlightThreadTitle: faker.lorem.sentence(),
     language: faker.helpers.arrayElement(['en', 'es', 'fr', 'de']),
     sentiment: faker.helpers.arrayElement(['positive', 'neutral', 'negative']),
     categories: [faker.word.sample(), faker.word.sample()],
@@ -29,5 +29,17 @@ export function fakePost() {
     entities: fakeJSONB(),
     crawled: faker.date.past(),
     updated: faker.date.past()
+  };
+}
+
+export function fakeSerializedPost() {
+  const post = fakePost();
+
+  return {
+    post_id: post.uuid,
+    highlight_title: post.highlightTitle,
+    highlight_text: post.highlightText,
+    highlight_thread_title: post.highlightThreadTitle,
+    ...post
   };
 }
