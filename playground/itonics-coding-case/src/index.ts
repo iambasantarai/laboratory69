@@ -5,9 +5,7 @@ import { WebzQueryBuilder } from './builders/webzioquery.builder';
 import dataSource from './config/typeorm.config';
 
 async function main() {
-  const query = new WebzQueryBuilder()
-    .query('Google topic:"financial and economic news" sentiment:negative')
-    .build();
+  const query = new WebzQueryBuilder().query('Moon landing was fake.').build();
 
   try {
     logger.info('Establishing database connection.');
