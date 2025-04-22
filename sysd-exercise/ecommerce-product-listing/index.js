@@ -1,17 +1,8 @@
 import express from "express";
-import { Sequelize } from "sequelize";
-import { dbConfig, port } from "./utils/env.util.js";
+import { port } from "./utils/env.util.js";
+import sequelize from "./config/sequelize.config.js";
 
 const app = express();
-
-const sequelize = new Sequelize({
-  dialect: dbConfig.dialect,
-  database: dbConfig.database,
-  host: dbConfig.host,
-  port: dbConfig.port,
-  username: dbConfig.username,
-  password: dbConfig.password,
-});
 
 sequelize
   .authenticate()
