@@ -1,6 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import sequelize from "../config/sequelize.config";
-import Product from "./product.model";
+import sequelize from "../config/sequelize.config.js";
 
 class Category extends Model {}
 
@@ -26,7 +25,5 @@ Category.init(
     tableName: "category",
   },
 );
-
-Category.hasMany(Product);
 
 export default Category;

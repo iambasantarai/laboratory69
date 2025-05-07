@@ -1,7 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import sequelize from "../config/sequelize.config";
-import Brand from "./brand.model";
-import Category from "./category.model";
+import sequelize from "../config/sequelize.config.js";
 
 class Product extends Model {}
 
@@ -31,9 +29,4 @@ Product.init(
   },
 );
 
-Product.Brand = Product.belongsTo(Brand);
-Product.Category = Product.belongsTo(Category);
-
 export default Product;
-
-module.exports = Product;
